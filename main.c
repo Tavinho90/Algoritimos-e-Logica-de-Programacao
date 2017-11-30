@@ -1,0 +1,423 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>// biblio para funções rand() e srand()
+#include <time.h>// biblio para função time()
+#include "matriz.h"
+
+
+/*void MatrizA(int nlA, int ncA, float A[10][10], int a1, int a2){  //preenche a matriz A com valores aleatorios
+
+    int i, j;
+    int opp; //auxilia em definir inteiro ou real
+    float temp; //variavel temporária que armazena o valor aleatório
+    printf("\nQual o intervalo de valores?\n");
+    printf("Menor: ");
+    scanf("%d", &a1);
+    printf("Maior: ");
+    scanf("%d", &a2);
+
+    srand(time(NULL)); //semente para a funçao aleatoria
+
+    printf("\nDeseja valores inteiros ou reais?\n"
+           "(1) Inteiros \n"
+           "(2) Reais\n");
+
+    scanf("%d", &opp);
+    printf(" - OK, matriz definida!");
+
+    switch(opp){
+
+    case 1:
+
+        for(i=0; i<nlA; i++){
+            for(j=0; j<ncA; j++){
+                temp = rand() % (a2-a1 + 1); //cria uma faixa de numeros aleatorios
+                A[i][j] = a1 + temp;  //acrescenta o menor numero do espaço aleatorio a faixa gerada
+            }
+        }
+        break;
+
+    case 2:
+
+        for(i=0; i<nlA; i++){
+            for(j=0; j<ncA; j++){
+                temp = rand() % (100*(a2-a1)); //cria uma faixa de numeros aleatorios com um range 100x maior
+                A[i][j] = a1 + (temp/100);  //acrescenta o limite inferior e adiciona duas casa decimais ao dividir por 100
+            }
+        }
+        break;
+
+    }
+}
+
+void MatrizB(int nlB, int ncB, float B[10][10], int b1, int b2){   //preeche a matriz B com valores aleatorios - ANALOGA A FUNÇÃO ANTERIOR
+
+    int i, j;
+    int opp;
+    float temp;
+
+    printf("Qual o intervalo de valores?\n");
+    printf("Menor: ");
+    scanf("%d", &b1);
+    printf("Maior: ");
+    scanf("%d", &b2);
+
+    srand(time(NULL));
+
+    printf("\nDeseja valores inteiros ou reais?\n"
+           "(1) Inteiros \n"
+           "(2) Reais\n");
+
+    scanf("%d", &opp);
+
+    switch(opp){
+
+    case 1:
+
+        for(i=0; i<nlB; i++){
+            for(j=0; j<ncB; j++){
+                temp = rand() % (b2 - b1 + 1);
+                B[i][j] = temp + b1;
+            }
+        }
+        break;
+
+    case 2:
+
+        for(i=0; i<nlB; i++){
+            for(j=0; j<ncB; j++){
+                temp = rand() % (100*(b2 - b1));
+                B[i][j] = (temp/100) + b1;
+            }
+        }
+        break;
+
+    }
+}
+
+void Soma(float A[10][10], float B[10][10], float C[10][10]){  // Soma A+B e gera C
+
+    int i, j;
+
+    for(i=0; i<10; i++){
+        for(j=0; j<10; j++){
+            C[i][j] = A[i][j] + B[i][j]; // Soma os valores de A e B correspondentes a posição e armazena em C
+        }
+    }
+
+}
+
+void Sub(float A[10][10], float B[10][10], float C[10][10]){   // Subtrai A-B e gera C
+
+    int i, j;
+
+    for(i=0; i<10; i++){
+        for(j=0; j<10; j++){
+            C[i][j] = A[i][j] - B[i][j]; // Subtrai os valores de A e B correspondentes a posição e armazena em C
+        }
+    }
+}
+
+void Produto(float A[10][10], float B[10][10], float C[10][10], int nlA, int ncB, int ncA){  // Multiplica A*B e gera C
+
+    int i, j, k;
+    int temp;
+
+    for(i=0; i<nlA; i++){
+        for(j=0; j<ncB; j++){
+            temp = 0;
+            for(k=0; k<ncA; k++){
+                temp = temp + A[i][k]*B[k][j]; //multiplica cada elemento correspondente da linha de A pelo a coluna de B,
+            }                                   //faz a soma e armazena em C
+            C[i][j] = temp;
+        }
+    }
+}
+
+void AtribuirA(float A[10][10]){  // Atribui uma valor para um elemento de A
+
+    int l, c;
+
+    printf("\nAtribuir valor para um elemento da matriz A");
+    printf("\n-Qual a linha do elemento?");
+    scanf("%d", &l);
+    printf("-Qual a coluna do elemento?");
+    scanf("%d", &c);
+    printf("-Qual sera o seu valor?");
+    scanf("%f", &A[l-1][c-1]); //uma vez que se começa em linha 0 e coluna 0, subtrai 1 pra compensar
+
+
+}
+
+void AtribuirB(float B[10][10]){  // Atribui um valor para um elemento de B - ANALOGA A ANTERIOR
+
+    int l, c;
+
+    printf("\nAtribuir valor para um elemento da matriz B");
+    printf("\n-Qual a linha do elemento?");
+    scanf("%d", &l);
+    printf("-Qual a coluna do elemento?");
+    scanf("%d", &c);
+    printf("-Qual sera o seu valor?");
+    scanf("%f", &B[l-1][c-1]);
+
+
+}
+
+void ImpA(float A[10][10], int nlA, int ncA, int c1){
+    int i, j;
+
+    if(c1 == 1){  //Verifica se A ja foi definida
+        for(i=0; i<nlA; i++){      //PRINTA A MATRIZ A
+            printf("\n");
+            for(j=0; j<ncA; j++){
+                printf("%.2f   ", A[i][j]);
+            }
+        }
+    }
+
+    else{
+        printf ("Matriz A nao definida");
+    }
+}
+
+void ImpB(float B[10][10], int nlB, int ncB, int c2){
+    int i, j;
+
+    if(c2==1){  //Verifica ser B ja foi definida
+        for(i=0; i<nlB; i++){      //PRINTA A MATRIZ B
+            printf("\n");
+            for(j=0; j<ncB; j++){
+                printf("%.2f   ", B[i][j]);
+            }
+        }
+    }
+
+    else{
+        printf ("Matriz B nao definida");
+    }
+}
+
+void ImpC(float C[10][10], int nlA, int ncB, int c7, int c8, int c9){
+    int i, j;
+
+        if(c7 == 1){  //Verifica se eh adiçao
+            printf("\nC = A+B\n");
+            for(i=0; i<nlA; i++){
+                printf("\n");
+                for(j=0; j<ncB; j++){
+                    printf("%.2f   ", C[i][j]);
+                }
+            }
+        }
+
+        if(c8 == 1){  //Verifica se eh subtraçao
+            printf("\nC = A-B\n");
+            for(i=0; i<nlA; i++){
+                printf("\n");
+                for(j=0; j<ncB; j++){
+                    printf("%.2f   ", C[i][j]);
+                }
+            }
+        }
+
+        if(c9 == 1){  //Verifica se eh multiplicaçao
+            printf("\nC = A*B\n");
+            for(i=0; i<nlA; i++){
+                printf("\n");
+                for(j=0; j<ncB; j++){
+                    printf("%.2f   ", C[i][j]);
+                }
+            }
+        }
+
+        if((c7==0 && c8==0) && c9==0){  // Verifica se C ja foi definida
+            printf("Matriz C nao definida");
+        }
+}*/
+int main(){
+
+  int op; //variável para o switch case
+    int nlA, ncA, nlB, ncB;
+    int i, j;
+    int c1=0, c2=0, c3=0, c4=0, c5=0, c6=0, c7=0, c8=0, c9=0; //variaveis que conferem se passos amteriores foram realizados
+    int a1, a2, b1, b2; //intervalos dos valores aleatórios
+    float A[10][10];
+    float B[10][10];
+    float C[10][10];
+
+    while(1!=0){
+        printf("\n\nPROGRAMA DE MANIPULACAO DE MATRIZES \n"
+       "(1) Definir o tamanho da matriz A \n"
+       "(2) Definir o tamanho da matriz B \n"
+       "(3) Preencher a matriz A com valores aleatorios \n"
+       "(4) Preencher a matriz B com valores aleatorios \n"
+       "(5) Atribuir valor para um elemento da matriz A \n"
+       "(6) Atribuir valor para um elemento da matriz B \n"
+       "(7) Calcular A+B \n"
+       "(8) Calcular A-B \n"
+       "(9) Calcular A*B \n"
+       "(10) Imprimir matriz A \n"
+       "(11) Imprimir matriz B \n"
+       "(12) Imprimir matriz C \n"
+       "(13) Imprimir as 3 matrizes \n"
+       "(14) Sair \n"
+       "\n"
+       "digite sua operacao:\n");
+
+    scanf("%d", &op);
+
+    switch(op){
+
+    case 1:
+        printf("Digite a quantidade de linhas de A: ");
+        scanf("%d", &nlA);
+        printf("Digite a quantidade de colunas de A: ");
+        scanf("%d", &ncA);
+
+        c1=1;
+
+        break;
+
+
+    case 2:
+        printf("Digite a quantidade de linhas de B: ");
+        scanf("%d", &nlB);
+        printf("Digite a quantidade de colunas de B: ");
+        scanf("%d", &ncB);
+
+        c2 = 1;
+
+        break;
+
+
+    case 3:
+        if(c1==1){
+            MatrizA(nlA, ncA, A, a1, a2);
+        }
+
+        else{
+            printf ("Tamanho da matriz A nao definido");
+        }
+
+        break;
+
+
+    case 4:
+        if(c2==1){
+            MatrizB(nlB, ncB, B, b1, b2);
+        }
+
+        else{
+            printf("Tamanho da matriz B nao definido");
+        }
+
+        break;
+
+
+    case 5:
+        AtribuirA(A);
+        break;
+
+
+    case 6:
+        AtribuirB(B);
+        break;
+
+
+    case 7:
+        if((nlA == nlB) && (ncA == ncB)){
+            Soma(A, B, C);
+            c7=1;
+            c8=0;
+            c9=0;
+        }
+
+        else{
+            printf("\nMatrizes de tamanhos diferentes, impossível somar!!\n");
+        }
+
+        break;
+
+
+    case 8:
+        if((nlA == nlB) && (ncA == ncB)){
+            Sub(A, B, C);
+            c7=0;
+            c8=1;
+            c9=0;
+        }
+
+        else{
+            printf("\nMatrizes de tamanhos diferentes, impossível somar!!\n");
+        }
+
+        break;
+
+
+    case 9:
+        if(ncA == nlB){
+            Produto(A, B, C, nlA, ncB, ncA);
+            c7=0;
+            c8=0;
+            c9=1;
+        }
+
+        else{
+            printf("Impossivel multiplicar: numero de colunas de A diferente de linhas de B!!!");
+        }
+        break;
+
+
+    case 10:
+        ImpA(A, nlA, ncA, c1);
+        break;
+
+
+    case 11:
+        ImpB(B, nlB, ncB, c2);
+        break;
+
+
+    case 12:
+        ImpC(C, nlA, ncB, c7, c8, c9);
+        break;
+
+    case 14:
+        printf("\nFIM\n");
+        return 0;
+
+
+    case 13:
+
+        for(i=0; i<nlA; i++){      //PRINTA A MATRIZ A
+            printf("\n");
+            for(j=0; j<ncA; j++){
+                printf("%.2f   ", A[i][j]);
+            }
+        }
+        printf("\n");
+
+        for(i=0; i<nlB; i++){      //PRINTA A MATRIZ B
+            printf("\n");
+            for(j=0; j<ncB; j++){
+                printf("%.2f   ", B[i][j]);
+            }
+        }
+        printf("\n");
+
+        for(i=0; i<nlA; i++){     //PRINTA A MATRIZ C
+            printf("\n");
+            for(j=0; j<ncB; j++){
+                printf("%.2f   ", C[i][j]);
+            }
+        }
+        printf("\n");
+
+
+    } //fecha switch
+    } //fecha while
+
+    return 0;
+
+}
