@@ -2,28 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-        /*int n1A;
-        int ncA;
-        int nlB;
-        int ncB;
-        int i;
-        int j;
-        int a1;
-        int a2;
-        int b1;
-        int b2;
-        int c1;
-        int c2;
-        int c3;
-        int c4;
-        int c5;
-        int c6;
-        int c7;
-        int c8;
-        int c9;
-        float A [10][10];
-        float B [10][10];
-        float C [10][10];*/
+     
 void MatrizA(int nlA, int ncA, float A[10][10], int a1, int a2){  //preenche a matriz A com valores aleatorios
 
     int i, j;
