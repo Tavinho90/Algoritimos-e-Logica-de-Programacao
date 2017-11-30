@@ -1,30 +1,7 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
-        /*extern int opp;
-        extern int op;
-        extern int n1A;
-        extern int ncA;
-        extern int nlB;
-        extern int ncB;
-        extern int i;
-        extern int j;
-        extern int a1;
-        extern int a2;
-        extern int b1;
-        extern int b2;
-        extern int c1;
-        extern int c2;
-        extern int c3;
-        extern int c4;
-        extern int c5;
-        extern int c6;
-        extern int c7;
-        extern int c8;
-        extern int c9;
-        extern float A[10][10];
-        extern float B[10][10];
-        extern float C[10][10];*/
+       
    /**
     * @brief MatrizA Preenche os valores da matriz A
     * @param nlA Define o numero de linhas da matriz A
